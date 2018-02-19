@@ -1,8 +1,6 @@
 # Tinycert
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tinycert`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A small client for the Tinycert.org api
 
 ## Installation
 
@@ -22,7 +20,47 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'tinycert'
+tinycert = TinyCert.new '<your@email.address>', '<your passphrase>', '<your api key>'
+```
+
+Note, your API key can be found [in the API documentation](https://www.tinycert.org/docs/api/v1/intro)
+
+**Your passphrase is _not_ the same as your password**. You should have your passphrase stored in your browser or securely elsewhere. You can set your password on the [Tinycert profile page](https://www.tinycert.org/profile)
+
+### List all CAs
+
+```ruby
+cas = tinycert.authorities.list
+```
+
+### Fetch a CA
+
+```ruby
+ca = tinycert.authorities[1111]
+=> #<Tinycert::CertAuthority:0x007f83423cd710 @id=1111, @name="Ideas Asylum">
+```
+
+### Create a cert
+
+```ruby
+ca.certs.create 'example.com', names: ['example.com', 'www.example.com', '*.example.com']
+```
+
+### Find all the valid certs
+
+```ruby
+certs = ca.certs.good
+[#<Tinycert::Cert:0x007f97d84043c8 @id=11111, @status="good", @cn=nil, @names=[]>]
+```
+
+### Get more details
+
+```
+certs.first.details
+=> #<Tinycert::Cert:0x007ff34bb0fce8 @id=14236, @status="good", @cn="lvh.me", @names=["lvh.me", "*.lvh.me"]>
+```
 
 ## Development
 
@@ -32,7 +70,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tinycert.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ideasasylum/tinycert.
 
 ## License
 
