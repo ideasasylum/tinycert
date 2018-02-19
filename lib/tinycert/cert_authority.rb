@@ -12,7 +12,7 @@ class Tinycert::CertAuthority
   end
 
   def certs
-    Certs.new(@tinycert, self)
+    Tinycert::Certs.new(@tinycert, self)
   end
 
   def details
