@@ -45,7 +45,7 @@ class Tinycert::Cert
   def details
     request = @tinycert.session_request 'https://www.tinycert.org/api/v1/cert/details', { cert_id: id }
     parse_results request.results
-    results
+    self
   end
 
   def parse_results results
