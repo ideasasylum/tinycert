@@ -2,6 +2,10 @@ require 'pry'
 
 require 'tinycert/request'
 require 'tinycert/cert_authorities'
+require 'tinycert/cert_authority'
+require 'tinycert/certs'
+require 'tinycert/cert'
+require 'tinycert/error'
 
 class TinyCert
   attr_reader :api_key, :email, :passphrase, :token
