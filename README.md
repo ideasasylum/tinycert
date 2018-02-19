@@ -2,6 +2,8 @@
 
 A small client for the Tinycert.org api
 
+![Build status](https://travis-ci.org/ideasasylum/tinycert.svg?branch=master)
+
 ## Installation
 
 Add this line to your application's Gemfile:
