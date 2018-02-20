@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ```ruby
 require 'tinycert'
-tinycert = TinyCert.new '<your@email.address>', '<your passphrase>', '<your api key>'
+tinycert = TinyCert::Client.new '<your@email.address>', '<your passphrase>', '<your api key>'
 ```
 
 Note, your API key can be found [in the API documentation](https://www.tinycert.org/docs/api/v1/intro)
