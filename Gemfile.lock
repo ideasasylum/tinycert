@@ -2,13 +2,11 @@ PATH
   remote: .
   specs:
     tinycert (0.1.0)
-      deepsort
 
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
-    deepsort (0.4.0)
     diff-lcs (1.3)
     method_source (0.9.0)
     pry (0.11.3)
