@@ -38,8 +38,8 @@ module Tinycert
       req = Net::HTTP::Post.new(@uri)
       req.add_field "Content-Type", "application/x-www-form-urlencoded; charset=utf-8"
       req.body = URI.encode_www_form(params_with_digest)
-      # puts @uri
-      # puts req.body
+      puts @uri
+      puts req.body
       req
     end
 
@@ -53,6 +53,7 @@ module Tinycert
     def response
       res = @client.request(build_request)
       raise Tinycert::Error.new(res) if res.code != '200'
+      puts res.body
       res
     end
 
