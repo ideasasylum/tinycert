@@ -63,6 +63,7 @@ module Tinycert
 
     def parse_results results
       @id = results['id']
+      @id ||= results['cert_id']
       @status = results['status']
       @cn = results['CN']
       @cn ||= results['name']
