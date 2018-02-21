@@ -65,7 +65,7 @@ module Tinycert
       @id = results['id']
       @status = results['status']
       @cn = results['CN']
-      @name = results['name']
+      @cn ||= results['name']
       @names = results.fetch('Alt', []).collect { |name| name['DNS'] }
     end
   end
