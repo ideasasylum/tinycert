@@ -20,7 +20,7 @@ RSpec.describe Tinycert::Request do
   let(:request) { Tinycert::Request.new api_key, url, params }
 
   describe 'response' do
-    let(:fake_response) { double(code: code) }
+    let(:fake_response) { double(body: '{}', code: code) }
     before(:each) do
       # Force the http client to return the fake response
       allow(request.instance_variable_get('@client')).to receive(:request).and_return fake_response
