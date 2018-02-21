@@ -13,7 +13,7 @@ module Tinycert
     end
 
     def [](ca_id)
-      list.find { |ca| ca.id == ca_id }
+      list.find { |ca| ca.id.to_s == ca_id.to_s }
     end
   end
 end
