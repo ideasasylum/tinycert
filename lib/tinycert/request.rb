@@ -20,9 +20,11 @@ module Tinycert
 
     # Sort the params consistently
     def prepare_params params
+      results = {}
+      # Build a new hash with string keys
+      params.each { |k, v| results[k.to_s] = v }
       # Sort nested structures
-      # params.sort_by { |k,v| k.to_s }.to_h.each { |k, v| params[k] = v.sort.to_h if v.respond_to?(:sort) }
-      params.sort.to_h
+      results.sort.to_h
     end
 
     def digest

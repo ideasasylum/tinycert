@@ -48,7 +48,6 @@ module Tinycert
       }
 
       request = @tinycert.session_request 'https://www.tinycert.org/api/v1/cert/new', {
-        token: @tinycert.token,
         CN: name,
         C: c,
         O: o,
