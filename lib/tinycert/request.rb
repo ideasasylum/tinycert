@@ -28,25 +28,26 @@ module Tinycert
     end
 
     def digest
-      sorted_params = @params
-      sorted_params_string = URI.encode_www_form(sorted_params)
-      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), @api_key, sorted_params_string)
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), @api_key, params_string)
+    end
+
+    def params_string
+      # Replace * with %2A
+      URI.encode_www_form(@params).gsub(/\*/, '%2A')
     end
 
     # Create Request
     def build_request
       req = Net::HTTP::Post.new(@uri)
       req.add_field "Content-Type", "application/x-www-form-urlencoded; charset=utf-8"
-      req.body = URI.encode_www_form(params_with_digest).sub(/\*/, '%2A')
-      puts @uri
-      puts req.body
+      req.body = params_string_with_digest
+      # puts @uri
+      # puts req.body
       req
     end
 
-    def params_with_digest
-      p = @params.dup
-      p['digest'] = digest
-      p
+    def params_string_with_digest
+      params_string << "&digest=#{digest}"
     end
 
     # Fetch Request

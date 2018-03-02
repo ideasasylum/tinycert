@@ -53,16 +53,12 @@ RSpec.describe Tinycert::Request do
     it { is_expected.to eq('16b436bd8779dadf0327a97eac54b631e02c4643cbf52ccc1358431691f74b21') }
   end
 
-  describe 'build_request' do
-    subject { request.build_request.body }
+  describe 'params_string' do
+    subject { request.params_string }
 
-    # This is a test string frmo the Tinycert API documentation that does not
+    # This is a test string from the Tinycert API documentation that does not
     # include the digest. Hence we'll create the fake using the params without the
     # digest in the request
-    before(:each) do
-      allow(request).to receive(:params_with_digest).and_return request.params
-    end
-
     it { is_expected.to eq("C=US&CN=example.com&L=Chicago&O=ACME%2C+Inc.&OU=IT+Department&SANs%5B0%5D%5BDNS%5D=www.example.com&SANs%5B1%5D%5BDNS%5D=example.com&ST=Illinois&ca_id=123&token=d7dd6880c206216a9ed74f92ca8edaef88728bbb2c8b23020c624de9a7d08d6f") }
   end
 
