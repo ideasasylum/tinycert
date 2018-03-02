@@ -38,23 +38,23 @@ module Tinycert
       Tinycert::Cert.new @tinycert, results
     end
 
-    def create name, c:'US', l:'', o:'', ou:'', st: '', names:[]
+    def create name, c:'US', l:nil, o:nil, ou:nil, st: nil, names:[]
       # Include the common name in the SANs too
       all_names = names << name
 
-      indexed_names = all_names.uniq.each_with_index.inject({}) { |names, (name, index)|
-        names["SANs[#{index}][DNS]"] = name
-        names
+      indexed_names = all_names.uniq.each_with_index.inject({}) { |all, (n, index)|
+        all["SANs[#{index}][DNS]"] = n
+        all
       }
-
-      request = @tinycert.session_request 'https://www.tinycert.org/api/v1/cert/new', {
+      request_params = {
         CN: name,
         C: c,
         O: o,
         OU: ou,
         ST: st,
         ca_id: ca.id
-       }.merge(indexed_names)
+       }.merge(indexed_names).reject { |k,v| v.nil? }
+      request = @tinycert.session_request 'https://www.tinycert.org/api/v1/cert/new', request_params
       Tinycert::Cert.new @tinycert, request.results
     end
   end
