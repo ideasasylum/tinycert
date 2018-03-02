@@ -19,10 +19,10 @@ module Tinycert
     end
 
     # Sort the params consistently
-    def prepare_params params
+    def prepare_params p
       results = {}
       # Build a new hash with string keys
-      params.each { |k, v| results[k.to_s] = v }
+      p.each { |k, v| results[k.to_s] = v }
       # Sort nested structures
       results.sort.to_h
     end
@@ -37,16 +37,16 @@ module Tinycert
     def build_request
       req = Net::HTTP::Post.new(@uri)
       req.add_field "Content-Type", "application/x-www-form-urlencoded; charset=utf-8"
-      req.body = URI.encode_www_form(params_with_digest)
+      req.body = URI.encode_www_form(params_with_digest).sub(/\*/, '%2A')
       puts @uri
       puts req.body
       req
     end
 
     def params_with_digest
-      params = @params.dup
-      params['digest'] = digest
-      params
+      p = @params.dup
+      p['digest'] = digest
+      p
     end
 
     # Fetch Request
