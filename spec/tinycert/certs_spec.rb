@@ -14,9 +14,6 @@ RSpec.describe Tinycert::Certs do
       expected_params = {
         CN: name,
         C: 'US',
-        O: '',
-        OU: '',
-        ST: '',
         ca_id: 1,
         "SANs[0][DNS]"=>"app.example.com",
         "SANs[1][DNS]"=>"test.example.com",
