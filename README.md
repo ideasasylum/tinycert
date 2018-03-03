@@ -31,6 +31,18 @@ Note, your API key can be found [in the API documentation](https://www.tinycert.
 
 **Your passphrase is _not_ the same as your password**. You should have your passphrase stored in your browser or securely elsewhere. You can set your password on the [Tinycert profile page](https://www.tinycert.org/profile)
 
+### Connect with a block
+
+This will also call disconnect after the block
+
+```ruby
+t = TinyCert::Client.new '<your@email.address>', '<your passphrase>', '<your api key>'
+t.connect do |t|
+  a = t.authorities[5358]
+  cert = a.certs.create 'example.com', names: ['www.example.com', '*.example.com'], o: 'Development'
+end
+```
+
 ### List all CAs
 
 ```ruby

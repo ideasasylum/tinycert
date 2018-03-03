@@ -9,9 +9,15 @@ module Tinycert
       @token = nil
     end
 
-    def connect
+    def connect &block
       request = request 'https://www.tinycert.org/api/v1/connect', { email: email, passphrase: passphrase }
       @token = request.results['token']
+      if block_given?
+        result = yield self
+        disconnect
+        return result
+      end
+      return self
     end
 
     def request url, params
