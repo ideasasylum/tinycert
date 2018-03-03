@@ -18,7 +18,7 @@ module Tinycert
       Tinycert::Request.new api_key, url, params
     end
 
-    def session_request url, params
+    def session_request url, params={}
       connect unless token
       Tinycert::Request.new api_key, url, params.merge({token: token})
     end
@@ -28,6 +28,9 @@ module Tinycert
     end
 
     def disconnect
+      request = session_request 'https://www.tinycert.org/api/v1/disconnect'
+      @token = nil
+      request.results
     end
   end
 end
