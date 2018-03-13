@@ -32,8 +32,7 @@ module Tinycert
     end
 
     def params_string
-      # Replace * with %2A
-      URI.encode_www_form(@params).gsub(/\*/, '%2A')
+      URI.encode_www_form(@params)
     end
 
     # Create Request
